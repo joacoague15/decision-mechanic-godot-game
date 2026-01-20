@@ -1,95 +1,92 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtg63fcudhw83"]
+[gd_scene load_steps=6 format=3 uid="uid://dtg63fcudhw83"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_46jfg"]
-[ext_resource type="Texture2D" uid="uid://cdl554tgqlped" path="res://example1.png" id="2_5qam1"]
+[ext_resource type="Texture2D" uid="uid://1dk1vl21x68r" path="res://example1.png" id="2_5qam1"]
+[ext_resource type="Texture2D" uid="uid://yqa7hb1kv1vy" path="res://example2.png" id="2_lbqxt"]
+[ext_resource type="Texture2D" uid="uid://3jsft6llsdpn" path="res://example3.png" id="3_1icln"]
+[ext_resource type="Texture2D" uid="uid://bqedqojjsslpw" path="res://example4.png" id="4_r6ume"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_46jfg")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="Root" type="VBoxContainer" parent="MarginContainer"]
+[node name="FearBar" type="TextureProgressBar" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Stats" type="GridContainer" parent="MarginContainer/Root"]
-layout_mode = 2
-columns = 4
-
-[node name="FearWrap" type="CenterContainer" parent="MarginContainer/Root/Stats"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-
-[node name="FearBar" type="TextureProgressBar" parent="MarginContainer/Root/Stats/FearWrap"]
-layout_mode = 2
+offset_top = 24.0
+offset_right = 1080.0
+offset_bottom = 744.0
+scale = Vector2(0.2, 0.2)
 value = 50.0
 fill_mode = 3
 texture_under = ExtResource("2_5qam1")
 texture_progress = ExtResource("2_5qam1")
 tint_under = Color(0.272047, 0.272047, 0.272047, 1)
 
-[node name="BeliefWrap" type="CenterContainer" parent="MarginContainer/Root/Stats"]
+[node name="BeliefBar" type="TextureProgressBar" parent="."]
 layout_mode = 2
-
-[node name="BeliefBar" type="TextureProgressBar" parent="MarginContainer/Root/Stats/BeliefWrap"]
-layout_mode = 2
+offset_left = 200.0
+offset_top = 24.0
+offset_right = 1280.0
+offset_bottom = 1048.0
+scale = Vector2(0.2, 0.2)
 value = 50.0
 fill_mode = 3
-texture_under = ExtResource("2_5qam1")
-texture_progress = ExtResource("2_5qam1")
+texture_under = ExtResource("2_lbqxt")
+texture_progress = ExtResource("2_lbqxt")
 tint_under = Color(0.270588, 0.270588, 0.270588, 1)
 
-[node name="EconomyWrap" type="CenterContainer" parent="MarginContainer/Root/Stats"]
+[node name="PowerBar" type="TextureProgressBar" parent="."]
 layout_mode = 2
-
-[node name="EconomyBar" type="TextureProgressBar" parent="MarginContainer/Root/Stats/EconomyWrap"]
-layout_mode = 2
+offset_left = 300.0
+offset_top = 24.0
+offset_right = 1836.0
+offset_bottom = 1048.0
+scale = Vector2(0.2, 0.2)
 value = 50.0
 fill_mode = 3
-texture_under = ExtResource("2_5qam1")
-texture_progress = ExtResource("2_5qam1")
+texture_under = ExtResource("3_1icln")
+texture_progress = ExtResource("3_1icln")
 tint_under = Color(0.270588, 0.270588, 0.270588, 1)
 
-[node name="PowerWrap" type="CenterContainer" parent="MarginContainer/Root/Stats"]
+[node name="EconomyBar" type="TextureProgressBar" parent="."]
 layout_mode = 2
-
-[node name="PowerBar" type="TextureProgressBar" parent="MarginContainer/Root/Stats/PowerWrap"]
-layout_mode = 2
+offset_left = 520.0
+offset_top = 24.0
+offset_right = 1600.0
+offset_bottom = 1048.0
+scale = Vector2(0.2, 0.2)
 value = 50.0
 fill_mode = 3
-texture_under = ExtResource("2_5qam1")
-texture_progress = ExtResource("2_5qam1")
+texture_under = ExtResource("4_r6ume")
+texture_progress = ExtResource("4_r6ume")
 tint_under = Color(0.270588, 0.270588, 0.270588, 1)
 
-[node name="EventPanel" type="PanelContainer" parent="MarginContainer/Root"]
+[node name="EventPanel" type="PanelContainer" parent="."]
 layout_mode = 2
+offset_left = 43.0
+offset_top = 900.0
+offset_right = 1876.0
+offset_bottom = 1000.0
 
-[node name="EventVBox" type="VBoxContainer" parent="MarginContainer/Root/EventPanel"]
+[node name="EventVBox" type="VBoxContainer" parent="EventPanel"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="EventText" type="RichTextLabel" parent="MarginContainer/Root/EventPanel/EventVBox"]
+[node name="EventText" type="RichTextLabel" parent="EventPanel/EventVBox"]
 layout_mode = 2
 
-[node name="DeltaText" type="Label" parent="MarginContainer/Root/EventPanel/EventVBox"]
+[node name="DeltaText" type="Label" parent="EventPanel/EventVBox"]
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Root/EventPanel/EventVBox"]
+[node name="Buttons" type="HBoxContainer" parent="EventPanel/EventVBox"]
 layout_mode = 2
+alignment = 1
 
-[node name="OptionA" type="Button" parent="MarginContainer/Root/EventPanel/EventVBox/Buttons"]
+[node name="OptionA" type="Button" parent="EventPanel/EventVBox/Buttons"]
 layout_mode = 2
 text = "Si"
 
-[node name="OptionB" type="Button" parent="MarginContainer/Root/EventPanel/EventVBox/Buttons"]
+[node name="OptionB" type="Button" parent="EventPanel/EventVBox/Buttons"]
 layout_mode = 2
 text = "No"

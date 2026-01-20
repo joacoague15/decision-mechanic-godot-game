@@ -16,17 +16,20 @@ var stats := {
 var last_event_id: String = ""
 var current_event: Dictionary = {}
 
-# 1 icono (TextureProgressBar) por stat
-@onready var fear_bar: TextureProgressBar = $MarginContainer/Root/Stats/FearWrap/FearBar
-@onready var belief_bar: TextureProgressBar = $MarginContainer/Root/Stats/BeliefWrap/BeliefBar
-@onready var power_bar: TextureProgressBar = $MarginContainer/Root/Stats/PowerWrap/PowerBar
-@onready var economy_bar: TextureProgressBar = $MarginContainer/Root/Stats/EconomyWrap/EconomyBar
+@onready var fear_bar: TextureProgressBar = $FearBar
+@onready var belief_bar: TextureProgressBar = $BeliefBar
+@onready var power_bar: TextureProgressBar = $PowerBar
+@onready var economy_bar: TextureProgressBar = $EconomyBar
 
-@onready var event_text: RichTextLabel = $MarginContainer/Root/EventPanel/EventVBox/EventText
-@onready var delta_text: Label = $MarginContainer/Root/EventPanel/EventVBox/DeltaText
-@onready var option_a: Button = $MarginContainer/Root/EventPanel/EventVBox/Buttons/OptionA
-@onready var option_b: Button = $MarginContainer/Root/EventPanel/EventVBox/Buttons/OptionB
-@onready var event_panel: CanvasItem = $MarginContainer/Root/EventPanel
+@onready var event_text: RichTextLabel = $EventPanel/EventVBox/EventText
+@onready var delta_text: Label = $EventPanel/EventVBox/DeltaText
+@onready var option_a: Button = $EventPanel/EventVBox/Buttons/OptionA
+@onready var option_b: Button = $EventPanel/EventVBox/Buttons/OptionB
+@onready var event_panel: CanvasItem = $EventPanel
+
+const STAT_TWEEN_TIME := 0.25
+
+var stat_tweens := {}
 
 var events: Array[Dictionary] = [
 	{
@@ -120,10 +123,23 @@ func _apply_effects(fx: Dictionary) -> Array[String]:
 	return lines
 
 func _refresh_stats_ui() -> void:
-	fear_bar.value = stats["fear"]
-	belief_bar.value = stats["belief"]
-	power_bar.value = stats["power"]
-	economy_bar.value = stats["economy"]
+	_animate_bar(fear_bar, "fear")
+	_animate_bar(belief_bar, "belief")
+	_animate_bar(power_bar, "power")
+	_animate_bar(economy_bar, "economy")
+	
+func _animate_bar(bar: TextureProgressBar, stat_key: String) -> void:
+	var target := float(stats[stat_key])
+	
+
+	if stat_tweens.has(stat_key) and is_instance_valid(stat_tweens[stat_key]):
+		(stat_tweens[stat_key] as Tween).kill()
+
+	var t := create_tween()
+	
+	stat_tweens[stat_key] = t
+	t.tween_property(bar, "value", target, STAT_TWEEN_TIME).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 func _show_delta_feedback(lines: Array[String]) -> void:
 	if lines.is_empty():
