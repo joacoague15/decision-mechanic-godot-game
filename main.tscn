@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtg63fcudhw83"]
+[gd_scene load_steps=11 format=3 uid="uid://dtg63fcudhw83"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_46jfg"]
 [ext_resource type="Texture2D" uid="uid://1dk1vl21x68r" path="res://example1.png" id="2_5qam1"]
 [ext_resource type="Texture2D" uid="uid://yqa7hb1kv1vy" path="res://example2.png" id="2_lbqxt"]
 [ext_resource type="Texture2D" uid="uid://3jsft6llsdpn" path="res://example3.png" id="3_1icln"]
 [ext_resource type="Texture2D" uid="uid://bqedqojjsslpw" path="res://example4.png" id="4_r6ume"]
+[ext_resource type="Texture2D" uid="uid://p7vbp64how2w" path="res://character_1.png" id="6_oduo3"]
+[ext_resource type="Texture2D" uid="uid://carpolkk7rxwp" path="res://context_background.png" id="7_y00sm"]
+[ext_resource type="Texture2D" uid="uid://bgc8lr6s3w77k" path="res://context_text.png" id="8_edl1t"]
+[ext_resource type="Texture2D" uid="uid://b3xnswkjp8pjy" path="res://button_sprite.png" id="9_cwrt0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3o3tg"]
+texture = ExtResource("9_cwrt0")
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -62,31 +69,48 @@ texture_under = ExtResource("4_r6ume")
 texture_progress = ExtResource("4_r6ume")
 tint_under = Color(0.270588, 0.270588, 0.270588, 1)
 
-[node name="EventPanel" type="PanelContainer" parent="."]
-layout_mode = 2
-offset_left = 43.0
-offset_top = 900.0
-offset_right = 1876.0
-offset_bottom = 1000.0
+[node name="character" type="Sprite2D" parent="."]
+position = Vector2(1115, 738)
+texture = ExtResource("6_oduo3")
 
-[node name="EventVBox" type="VBoxContainer" parent="EventPanel"]
-layout_mode = 2
-theme_override_constants/separation = 12
+[node name="ContextBackground" type="Sprite2D" parent="."]
+position = Vector2(607, 631)
+scale = Vector2(0.757031, 0.757031)
+texture = ExtResource("7_y00sm")
 
-[node name="EventText" type="RichTextLabel" parent="EventPanel/EventVBox"]
-layout_mode = 2
+[node name="ContextTextSpace" type="Sprite2D" parent="."]
+position = Vector2(601, 570)
+scale = Vector2(0.559961, 0.559961)
+texture = ExtResource("8_edl1t")
 
-[node name="DeltaText" type="Label" parent="EventPanel/EventVBox"]
-layout_mode = 2
+[node name="RichTextLabel" type="RichTextLabel" parent="ContextTextSpace"]
+anchors_preset = -1
+anchor_left = 0.316
+anchor_top = 0.154
+anchor_right = 0.686
+anchor_bottom = 0.844
+offset_left = -767.376
+offset_top = -511.696
+offset_right = -767.696
+offset_bottom = -512.256
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
 
-[node name="Buttons" type="HBoxContainer" parent="EventPanel/EventVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="OptionA" type="Button" parent="EventPanel/EventVBox/Buttons"]
-layout_mode = 2
+[node name="ButtonYes" type="Button" parent="."]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 810.0
+offset_right = 609.0
+offset_bottom = 983.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_3o3tg")
 text = "Si"
 
-[node name="OptionB" type="Button" parent="EventPanel/EventVBox/Buttons"]
-layout_mode = 2
+[node name="ButtonNo" type="Button" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 810.0
+offset_right = 894.0
+offset_bottom = 983.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_3o3tg")
 text = "No"
